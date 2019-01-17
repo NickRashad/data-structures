@@ -16,7 +16,9 @@ var Stack = function() {
     //Get the size of the object to determine what key:value needs to be removed
     var num = someInstance.size();
     //Delete object at num
+    var val = storage[num];
     delete storage[num];
+    return val;
   };
 
   someInstance.size = function() {
