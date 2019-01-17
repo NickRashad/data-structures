@@ -7,9 +7,22 @@ var Queue = function() {
   // Implement the methods below
 
   someInstance.enqueue = function(value) {
+    //Find last number value and add the next number for key
+    if (someInstance.size() > 0) {
+      var numbers = Object.keys(storage);
+      var num = parseInt(numbers.pop()) + 1;
+    } else {
+      var num = 1;
+    }
+    return storage[num] = value;
   };
 
   someInstance.dequeue = function() {
+    //Find the first occupied
+    var firstNum = Object.keys(storage)[0];
+    var val = storage[firstNum];
+    delete storage[firstNum];
+    return val;
   };
 
   someInstance.size = function() {
