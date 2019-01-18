@@ -11,7 +11,7 @@ var Queue = function() {
     if (someInstance.size() > 0) {
       var numbers = Object.keys(storage);
       var num = parseInt(numbers.pop()) + 1;
-    } else {
+    } else { // Return 1 if the object is empty
       var num = 1;
     }
     return storage[num] = value;
