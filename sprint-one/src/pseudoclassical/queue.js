@@ -1,6 +1,29 @@
 var Queue = function() {
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
+  this.storage;
+  return this.storage;
 };
 
+Queue.prototype.enqueue = function (value) {
+  if (this.size()) {
+    var num = Math.max(...Object.keys(this)
+      .map(Number)
+    ) + 1;
+  } else {
+    var num = 1;
+  }
+  return this[num] = value;
+};
+
+Queue.prototype.dequeue = function () {
+  var num = Math.min(...Object.keys(this).map(Number));
+  var val = this[num];
+  delete this[num];
+  return val;
+};
+
+Queue.prototype.size = function () {
+  return Object.keys(this).length;
+};
+
+var NewQueue = new Queue;
 
