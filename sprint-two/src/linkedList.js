@@ -2,47 +2,45 @@ var LinkedList = function() {
   var list = {};
   list.head = null;
   list.tail = null;
-  var count = 0;
 
   list.addToTail = function(value) {
-    // take in value
-    // create new key in list and
-    count++;
-    list[count] = Node(value); // create new Node and pass in value
+    // create new node and assign to variable
+    var newNode = Node(value);
     // check to see if this is first item
     if (list.head === null) {
       // update head
-      list.head = count;
+      list.head = newNode; // create new Node and pass in value
     } else {
-      // else
       // set node.next to equal current tail (list.tail)
-      // list[value].next
-      list[count - 1].next = count;
+      list.tail.next = newNode;
     }
-    // update current tail (list.tail) to equal
-    list.tail = count;
+    list.tail = newNode;
   };
 
   list.removeHead = function() {
     // create var to hold head val
-    var currentHead = list.head; // get the current head value
+    // head should become list.head.next
+    var returnData = list.head.value;
     // update current head by looking at the node.next value of current head
-
+    list.head = list.head.next; // get the current head value
     // return head value var
+    return returnData;
   };
 
   list.contains = function(target) {
-    // Start with node (First node value is Head)
-    //wrapped in function take in target and head
-    //Check if value is equal to target and
-    //return true
-    //->Else if valus is not equal to targer and is not null
-    //--->recurssion call: pass the next node
-    //->Else if Null
-    //--->return false
+    var find = function(node) {
+      // debugger;
+      if (node.value === target) {
+        return true;
+      } else if (node.value !== target && node.next !== null) {
+        return find(node.next);
+      } else {
+        return false;
+      }
+    };
+    return find(list.head);
     // end function
   };
-  // console.log(list);
   return list;
 };
 
@@ -64,7 +62,8 @@ var linkedList = LinkedList();
 linkedList.addToTail(4);
 linkedList.addToTail(5);
 linkedList.addToTail(6);
+linkedList.addToTail(7);
 linkedList.head;
 linkedList.tail;
-linkedList.removeHead();
+//linkedList.removeHead();
 console.log(linkedList.head.value, linkedList);
