@@ -7,7 +7,6 @@ Graph.prototype.nodes = {};
 Graph.prototype.addNode = function(node) {
   // Create a variable capturing new node instance w/ node passed
   // Place node on nodes object
-  // debugger;
   var obj = {
     edges: []
   };
@@ -17,7 +16,6 @@ Graph.prototype.addNode = function(node) {
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(node) {
   var status = false;
-  // debugger;
   for (var key in this.nodes) {
     if (parseInt(key) === node) {
       status = true;
@@ -44,10 +42,7 @@ Graph.prototype.removeNode = function(node) {
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
   // Lookup fromNode on nodes object check edges array for  toNode
-  // find fromNode
-  //iterate over fromNode.edges
-  // if item === toNode
-  //return true
+  // Return true if it's included
   return this.nodes[fromNode].edges.includes(toNode);
 };
 
@@ -61,10 +56,10 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  //lookup fromNode on this.nodes and iterate over the edges array
+  // Lookup fromNode on this.nodes and iterate over the edges array
+  // If item is in toNode then splice off
   var arr1 = this.nodes[fromNode].edges;
   var arr2 = this.nodes[toNode].edges;
-  // debugger;
   arr1.forEach(function(item, index, array) {
     if (item === toNode) {
       arr1.splice(index, 1);
@@ -75,8 +70,7 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
       arr2.splice(index, 1);
     }
   });
-  //if item === toNode
-  //splice operation
+
 };
 
 // Pass in a callback which will be executed on each node of the graph.
@@ -88,4 +82,11 @@ Graph.prototype.forEachNode = function(cb) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+  addNode: O(1) - Constant
+  contains: O(n) - Linear
+  removeNode: O(n) - Linear
+  hasEdge: O(n) - Linear
+  addEdge: O(1) - Constant
+  removeEdge: O(n) - Linear
+  forEachNode: O(n) - Linear
  */
