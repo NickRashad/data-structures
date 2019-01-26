@@ -7,10 +7,7 @@ HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   // Build the tuple var
   var tuple = [k, v];
-  debugger;
   var bucket = this._storage.get(index);
-  //var storageArr = _storage.bind(HashTable);
-  // var experiment = HashTable.bind(this, this._storage);
 
   // If bucket exists then
   if (Array.isArray(bucket) === true) {
@@ -33,10 +30,7 @@ HashTable.prototype.insert = function(k, v) {
         arr.push(tuple);
       }
     });
-    //this._storage.set(valueToBeChanged, v);
-    //} else {
-    this._storage.set(index, bucket); // [["Steven","Seagal"]],["Manners", "Batman"]
-    //}
+    this._storage.set(index, bucket);
   } else if (bucket === undefined) {
     // Else build first bucket on current index and push tuple
     this._storage.set(index, [tuple]);
@@ -66,9 +60,15 @@ HashTable.prototype.retrieve = function(k) {
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   // Access bucket if it exists
-  // if( storage[index][0] )
+  var tupleHolder = this._storage.get(index);
   // Iterate over each tuple at index 0 for the k
-  // If the value matches k then we want to splice the whole tuple
+  tupleHolder.forEach((item, ind, arr) => {
+    // If key is matches k then we want to splice the whole tuple
+    if (item[0] === k) {
+      arr.splice(ind, 1);
+    }
+  });
+  this._storage.set(index, tupleHolder);
 };
 
 /*
