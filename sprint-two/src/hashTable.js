@@ -48,9 +48,7 @@ HashTable.prototype.retrieve = function(k) {
     }
   });
   return result;
-  // return tupleHolder[1];
   // Access bucket if it exists
-  // if( storage[index][0] )
   // Create variable called returnValue set to undefined
   // Iterate over each tuple at index 0 for the k
   // If the value matches k then set returnValue to === tuple[1]
@@ -73,4 +71,7 @@ HashTable.prototype.remove = function(k) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+  Insert - O(1) - Constant
+  Retrieve - O(1) - Constant
+  Remove - O(1) - Constant
  */
