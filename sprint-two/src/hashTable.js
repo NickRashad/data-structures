@@ -7,32 +7,38 @@ HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   // Build the tuple var
   var tuple = [k, v];
-  // this._storage.set(index, tuple); //index value
-  // var tupleHolder = this._storage.get(index);
-
-  // If bucket exists
-  // console.log(this._storage.get(index));
+  debugger;
   var bucket = this._storage.get(index);
+  //var storageArr = _storage.bind(HashTable);
+  // var experiment = HashTable.bind(this, this._storage);
+
+  // If bucket exists then
   if (Array.isArray(bucket) === true) {
     // Iterate over current tuples in bucket
-    var status = true;
+    var shouldReplace = false;
+    var valueToBeChanged;
     bucket.forEach(function(item, ind) {
-      var currentK = bucket[item][0];
-      var currentV = bucket[item][1];
+      var currentK = item[0];
       // If tuple at 0 matches k then
       if (currentK === k) {
         // Update tuple at 1 to v
-        currentV = v;
-        status = false;
+        // this._storage.set(index[ind][1], v);
+        valueToBeChanged = index[ind][1];
+        shouldReplace = true;
       }
       // Otherwise
       if (ind === bucket.length - 1 && status) {
         // Push the tuple into bucket
-        this._storage.set(bucket, tuple);
       }
     });
+    if (shouldReplace) {
+      this._storage.set(valueToBeChanged, v);
+    } else {
+      this._storage.set(index, bucket);
+    }
+
   } else if (bucket === undefined) {
-    // Else build bucket then push tuple
+    // Else build first bucket on current index and push tuple
     this._storage.set(index, [tuple]);
   }
 };
