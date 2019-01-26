@@ -15,28 +15,28 @@ HashTable.prototype.insert = function(k, v) {
   // If bucket exists then
   if (Array.isArray(bucket) === true) {
     // Iterate over current tuples in bucket
-    var shouldReplace = false;
+    var shouldReplace = true;
     var valueToBeChanged;
-    bucket.forEach(function(item, ind) {
+    bucket.forEach(function(item, ind, arr) {
       var currentK = item[0];
+      var currentV = item[1];
       // If tuple at 0 matches k then
       if (currentK === k) {
         // Update tuple at 1 to v
-        // this._storage.set(index[ind][1], v);
-        valueToBeChanged = index[ind][1];
-        shouldReplace = true;
+        item[1] = v;
+        valueToBeChanged = ind; //index[ind][1]
+        shouldReplace = false;
       }
-      // Otherwise
-      if (ind === bucket.length - 1 && status) {
+      // If no values were replaced then add tuple
+      if (ind === bucket.length - 1 && shouldReplace) {
         // Push the tuple into bucket
+        arr.push(tuple);
       }
     });
-    if (shouldReplace) {
-      this._storage.set(valueToBeChanged, v);
-    } else {
-      this._storage.set(index, bucket);
-    }
-
+    //this._storage.set(valueToBeChanged, v);
+    //} else {
+    this._storage.set(index, bucket); // [["Steven","Seagal"]],["Manners", "Batman"]
+    //}
   } else if (bucket === undefined) {
     // Else build first bucket on current index and push tuple
     this._storage.set(index, [tuple]);
