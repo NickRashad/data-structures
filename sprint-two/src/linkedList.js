@@ -19,8 +19,14 @@ var LinkedList = function() {
   list.removeHead = function() {
     // Create var to hold former head value
     var returnData = list.head.value;
+    // If the tail and the head are the same then update tail to null
+    if (JSON.stringify(list.head) === JSON.stringify(list.tail)) {
+      list.head = list.head.next;
+      list.tail = null;
+    } else {
     // Update current head by looking at the node.next value of current head
-    list.head = list.head.next;
+      list.head = list.head.next;
+    }
     // Return former head value
     return returnData;
   };
