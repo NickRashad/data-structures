@@ -5,31 +5,27 @@ var HashTable = function() {
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  // Build the tuple var
+  // Build a variable to hold tuples
   var tuple = [k, v];
   var bucket = this._storage.get(index);
 
-  // If bucket exists then
+  // If bucket exists then update bucket to be returned
   if (Array.isArray(bucket) === true) {
     // Iterate over current tuples in bucket
     var shouldReplace = true;
-    var valueToBeChanged;
     bucket.forEach(function(item, ind, arr) {
       var currentK = item[0];
-      var currentV = item[1];
-      // If tuple at 0 matches k then
+      // If tuple key matches k then update tuple property to v
       if (currentK === k) {
-        // Update tuple at 1 to v
         item[1] = v;
-        valueToBeChanged = ind; //index[ind][1]
         shouldReplace = false;
       }
-      // If no values were replaced then add tuple
+      // If no values were replaced then push tuple to bucket
       if (ind === bucket.length - 1 && shouldReplace) {
-        // Push the tuple into bucket
         arr.push(tuple);
       }
     });
+    // Add modified bucket to replace storage index
     this._storage.set(index, bucket);
   } else if (bucket === undefined) {
     // Else build first bucket on current index and push tuple
@@ -39,20 +35,19 @@ HashTable.prototype.insert = function(k, v) {
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
+  // Access bucket if it exists
   var tupleHolder = this._storage.get(index);
-  //iterate over tupleHolder
+  // Create variable called returnValue set to undefined
   var result = undefined;
+  // Iterate over tupleHolder
+  // Iterate over each tuple at index 0 for the k
   tupleHolder.forEach((item, ind, arr) => {
+    // If the value matches k then set returnValue to === tuple[1]
     if (item[0] === k) {
       result = item[1];
     }
   });
   return result;
-  // Access bucket if it exists
-  // Create variable called returnValue set to undefined
-  // Iterate over each tuple at index 0 for the k
-  // If the value matches k then set returnValue to === tuple[1]
-  // return returnValue
 };
 
 HashTable.prototype.remove = function(k) {
