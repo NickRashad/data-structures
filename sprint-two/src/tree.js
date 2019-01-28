@@ -19,8 +19,7 @@ var treeMethods = {};
 treeMethods.addChild = function(value) {
   // var newNode = newTree;
   // newNode.value = value;
-  //For every new addchild we attach a .value and .children
-  // console.log(this);
+  // For every new addchild we attach a .value and .children
   var node = {
     children: [],
     value: value,
