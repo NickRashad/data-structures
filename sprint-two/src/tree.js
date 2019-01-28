@@ -2,13 +2,13 @@ var Tree = function(value) {
   var newTree = {};
   newTree.value = value;
 
-  extend(treeMethods, newTree);
+  _extend(treeMethods, newTree);
   newTree.children = []; // fix me
 
   return newTree;
 };
 
-var extend = function(from, to) {
+var _extend = function(from, to) {
   for (var key in from) {
     to[key] = from[key];
   }
@@ -33,16 +33,16 @@ treeMethods.addChild = function(value) {
 treeMethods.contains = function(target) {
   // children[i].value ? target
   var status = false;
-  var recursion = function(currChild) {
+  var _recursion = function(currChild) {
     for (var i = 0; i < currChild.length; i++) {
       if (currChild[i].value === target) {
         status = true;
       } else {
-        recursion(currChild[i].children);
+        _recursion(currChild[i].children);
       }
     }
   };
-  recursion(this.children);
+  _recursion(this.children);
   return status;
 };
 
