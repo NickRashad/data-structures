@@ -47,6 +47,12 @@ describe('hashTable', function() {
     window.getIndexBelowMaxForKey = oldHashFunction;
   });
 
+  it('should return values that have a different key but same index while (this.limit === 8) is true', function() {
+    hashTable.insert('Gingerbread', 'House');
+    hashTable.insert('Popeye', 'Person');
+    expect(hashTable.retrieve('Gingerbread')).to.equal('House');
+  });
+
   // (Advanced! Remove the extra "x" when you want the following tests to run)
   xit ('should double in size when needed', function() {
     _.each(people, function(person) {

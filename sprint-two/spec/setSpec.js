@@ -24,4 +24,11 @@ describe('set', function() {
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
 
+  it('should only add unique values to a set', function() {
+    set.add('Susan Sarandon');
+    set.add('Susan Sarandon');
+    set.remove('Susan Sarandon');
+    expect(set.contains('Susan Sarandon')).to.equal(false);
+  });
+
 });
